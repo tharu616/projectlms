@@ -2,8 +2,9 @@ package com.lms.studentlms.controller.admin;
 
 import com.lms.studentlms.dao.AdminLogDao;
 import com.lms.studentlms.dao.PaymentDao;
-
+import com.lms.studentlms.model.Payment;
 import com.lms.studentlms.model.PaymentRecord;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -37,7 +38,6 @@ public class PaymentManagementServlet extends HttpServlet {
         }
 
         String pathInfo = request.getPathInfo();
-
         if (pathInfo == null || pathInfo.equals("/")) {
             // List all payments
             List<PaymentRecord> payments = paymentDao.getAllPayments();
@@ -46,8 +46,7 @@ public class PaymentManagementServlet extends HttpServlet {
         } else if (pathInfo.startsWith("/view/")) {
             // Show payment details
             String transactionId = pathInfo.substring("/view/".length());
-            PaymentRecord payment = paymentDao.getPaymentByTransactionId(transactionId);
-
+            Payment payment = paymentDao.getPaymentByTransactionId(transactionId);
             if (payment != null) {
                 request.setAttribute("payment", payment);
                 request.getRequestDispatcher("/WEB-INF/views/admin/payments/view.jsp").forward(request, response);
@@ -93,35 +92,29 @@ public class PaymentManagementServlet extends HttpServlet {
         if ("updateStatus".equals(action)) {
             String transactionId = request.getParameter("transactionId");
             String newStatus = request.getParameter("status");
-
             if (transactionId != null && newStatus != null) {
                 boolean updated = paymentDao.updatePaymentStatus(transactionId, newStatus);
-
                 if (updated) {
                     adminLogDao.logActivity(adminEmail, "PAYMENT_UPDATE",
                             "Updated payment status: " + transactionId + " to " + newStatus);
                 }
             }
-
             // Redirect back to payments list
             response.sendRedirect(request.getContextPath() + "/admin/payments");
         } else if ("addNote".equals(action)) {
             String transactionId = request.getParameter("transactionId");
             String note = request.getParameter("note");
-
             if (transactionId != null && note != null && !note.trim().isEmpty()) {
                 boolean updated = paymentDao.addPaymentNote(transactionId, note);
-
                 if (updated) {
                     adminLogDao.logActivity(adminEmail, "PAYMENT_NOTE",
                             "Added note to payment: " + transactionId);
                 }
+                // Redirect back to payment details
+                response.sendRedirect(request.getContextPath() + "/admin/payments/view/" + transactionId);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/payments");
             }
-
-            // Redirect back to payment details
-            response.sendRedirect(request.getContextPath() + "/admin/payments/view/" + transactionId);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/payments");
         }
     }
 }

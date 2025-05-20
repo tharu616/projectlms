@@ -177,11 +177,12 @@ public class CourseDao extends BaseDao<Course> {
         query = query.toLowerCase();
         List<Course> allCourses = getAllCourses();
 
+        String finalQuery = query;
         return allCourses.stream()
                 .filter(course ->
-                        course.getCourseCode().toLowerCase().contains(query) ||
-                                course.getDuration().toLowerCase().contains(query) ||
-                                course.getFee().toLowerCase().contains(query))
+                        course.getCourseCode().toLowerCase().contains(finalQuery) ||
+                                course.getDuration().toLowerCase().contains(finalQuery) ||
+                                course.getFee().toLowerCase().contains(finalQuery))
                 .collect(Collectors.toList());
     }
 
