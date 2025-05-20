@@ -2,6 +2,8 @@ package com.lms.studentlms.controller.user;
 
 import com.lms.studentlms.dao.PaymentDao;
 
+import com.lms.studentlms.model.Payment;
+import com.lms.studentlms.model.PaymentRecord;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

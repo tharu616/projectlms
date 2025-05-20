@@ -1,5 +1,7 @@
 package com.lms.studentlms.dao;
 
+import com.lms.studentlms.model.Payment;
+import com.lms.studentlms.model.PaymentRecord;
 import com.lms.studentlms.util.FileUtils;
 
 import java.io.IOException;

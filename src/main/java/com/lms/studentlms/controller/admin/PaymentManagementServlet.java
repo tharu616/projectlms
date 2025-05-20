@@ -3,6 +3,7 @@ package com.lms.studentlms.controller.admin;
 import com.lms.studentlms.dao.AdminLogDao;
 import com.lms.studentlms.dao.PaymentDao;
 
+import com.lms.studentlms.model.PaymentRecord;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -2,6 +2,7 @@ package com.lms.studentlms.controller.admin;
 
 import com.lms.studentlms.dao.AdminLogDao;
 import com.lms.studentlms.dao.CourseRegistrationDao;
+import com.lms.studentlms.model.CourseRegistration;
 import com.lms.studentlms.util.RegistrationQueueManager;
 
 import jakarta.servlet.ServletException;

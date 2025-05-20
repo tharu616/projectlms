@@ -2,6 +2,7 @@ package com.lms.studentlms.controller.admin;
 
 import com.lms.studentlms.dao.AdminLogDao;
 import com.lms.studentlms.dao.AnnouncementDao;
+import com.lms.studentlms.model.Announcement;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -41,7 +42,6 @@ public class AnnouncementManagementServlet extends HttpServlet {
         }
 
         String pathInfo = request.getPathInfo();
-
         if (pathInfo == null || pathInfo.equals("/")) {
             // List all announcements
             List<Announcement> announcements = announcementDao.findAll();
@@ -56,7 +56,6 @@ public class AnnouncementManagementServlet extends HttpServlet {
             try {
                 int id = Integer.parseInt(idStr);
                 Announcement announcement = announcementDao.findById(id);
-
                 if (announcement != null) {
                     request.setAttribute("announcement", announcement);
                     request.getRequestDispatcher("/WEB-INF/views/admin/announcements/edit.jsp").forward(request, response);
@@ -72,7 +71,6 @@ public class AnnouncementManagementServlet extends HttpServlet {
             try {
                 int id = Integer.parseInt(idStr);
                 Announcement announcement = announcementDao.findById(id);
-
                 if (announcement != null) {
                     request.setAttribute("announcement", announcement);
                     request.getRequestDispatcher("/WEB-INF/views/admin/announcements/view.jsp").forward(request, response);
@@ -88,7 +86,6 @@ public class AnnouncementManagementServlet extends HttpServlet {
             try {
                 int id = Integer.parseInt(idStr);
                 boolean deleted = announcementDao.delete(id);
-
                 if (deleted) {
                     String adminEmail = (String) session.getAttribute("adminEmail");
                     adminLogDao.logActivity(adminEmail, "ANNOUNCEMENT_DELETE", "Deleted announcement: " + id);
@@ -120,7 +117,6 @@ public class AnnouncementManagementServlet extends HttpServlet {
             String title = request.getParameter("title");
             String content = request.getParameter("content");
             boolean isActive = "true".equals(request.getParameter("isActive"));
-
             Date publishDate = new Date(); // Default to now
             Date expiryDate = null;
 
@@ -147,11 +143,9 @@ public class AnnouncementManagementServlet extends HttpServlet {
             announcement.setActive(isActive);
 
             Announcement created = announcementDao.create(announcement);
-
             if (created != null) {
                 adminLogDao.logActivity(adminEmail, "ANNOUNCEMENT_CREATE",
                         "Created announcement: " + created.getTitle());
-
                 response.sendRedirect(request.getContextPath() + "/admin/announcements?created=true");
             } else {
                 request.setAttribute("error", "Failed to create announcement");
@@ -183,11 +177,9 @@ public class AnnouncementManagementServlet extends HttpServlet {
                 }
 
                 Announcement updated = announcementDao.update(existing);
-
                 if (updated != null) {
                     adminLogDao.logActivity(adminEmail, "ANNOUNCEMENT_UPDATE",
                             "Updated announcement: " + updated.getTitle());
-
                     response.sendRedirect(request.getContextPath() + "/admin/announcements?updated=true");
                 } else {
                     request.setAttribute("error", "Failed to update announcement");

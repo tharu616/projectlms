@@ -1,5 +1,6 @@
 package com.lms.studentlms.dao;
 
+import com.lms.studentlms.model.CourseRegistration;
 import com.lms.studentlms.util.FileUtils;
 
 import java.io.IOException;

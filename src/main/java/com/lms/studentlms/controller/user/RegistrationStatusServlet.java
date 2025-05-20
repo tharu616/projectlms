@@ -1,6 +1,7 @@
 package com.lms.studentlms.controller.user;
 
 import com.lms.studentlms.dao.CourseRegistrationDao;
+import com.lms.studentlms.model.CourseRegistration;
 import com.lms.studentlms.util.RegistrationQueueManager;
 
 import jakarta.servlet.ServletException;

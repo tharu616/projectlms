@@ -4,6 +4,7 @@ import com.lms.studentlms.dao.UserDao;
 import com.lms.studentlms.dao.AdminDao;
 import com.lms.studentlms.dao.AdminLogDao;
 
+import com.lms.studentlms.model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

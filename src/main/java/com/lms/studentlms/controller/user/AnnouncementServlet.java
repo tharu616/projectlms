@@ -2,6 +2,7 @@ package com.lms.studentlms.controller.user;
 
 import com.lms.studentlms.dao.AnnouncementDao;
 
+import com.lms.studentlms.model.Announcement;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

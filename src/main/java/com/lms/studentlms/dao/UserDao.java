@@ -1,5 +1,6 @@
 package com.lms.studentlms.dao;
 
+import com.lms.studentlms.model.User;
 import com.lms.studentlms.util.FileUtils;
 import org.mindrot.jbcrypt.BCrypt;
 
