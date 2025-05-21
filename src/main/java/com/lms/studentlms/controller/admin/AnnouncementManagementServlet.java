@@ -24,6 +24,7 @@ public class AnnouncementManagementServlet extends HttpServlet {
     private AdminLogDao adminLogDao;
     private SimpleDateFormat dateFormat;
 
+
     @Override
     public void init() throws ServletException {
         announcementDao = new AnnouncementDao();
