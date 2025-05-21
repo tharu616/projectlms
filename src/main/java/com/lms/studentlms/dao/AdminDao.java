@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+//inheritance
 public class AdminDao extends BaseDao<Admin> {
     private static final String FILE_PATH = "src/main/resources/data/admins.txt";
 
