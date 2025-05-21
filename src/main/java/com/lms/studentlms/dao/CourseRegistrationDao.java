@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
-    private static final String FILE_PATH = "src/main/resources/data/registrations.txt";
+    private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\registrations.txt";
 
     public CourseRegistrationDao() {
         super(FILE_PATH);

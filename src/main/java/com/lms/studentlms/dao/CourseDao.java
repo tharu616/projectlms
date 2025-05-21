@@ -11,8 +11,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CourseDao extends BaseDao<Course> {
-    private static final String FILE_PATH = "src/main/resources/data/courses.txt";
-    private static final String SCHOOLS_FILE_PATH = "src/main/resources/data/schools.txt";
+    private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\courses.txt";
+    private static final String SCHOOLS_FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\schools.txt";
 
     public CourseDao() {
         super(FILE_PATH);

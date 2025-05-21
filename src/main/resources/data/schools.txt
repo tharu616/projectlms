@@ -1,0 +1,5 @@
+Computer Science,School of Computer Science and Information Technology,Dr. James Wilson,cs@studentlms.com
+Mathematics,School of Mathematical Sciences,Dr. Emily Chen,math@studentlms.com
+Languages,School of Languages and Linguistics,Dr. Robert Garcia,languages@studentlms.com
+Life Sciences,School of Biological and Life Sciences,Dr. Sarah Thompson,lifesciences@studentlms.com
+Physical Sciences,School of Physics and Physical Sciences,Dr. Michael Johnson,physics@studentlms.com

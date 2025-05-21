@@ -1,0 +1,5 @@
+1,Important Registration Deadline,All course registrations for the summer semester must be completed by June 15th. Please ensure you submit your applications before the deadline.,admin@studentlms.com,1716150000000,1722000000000,true,ALL
+2,System Maintenance Notice,The Student LMS will be undergoing maintenance on May 25th from 2:00 AM to 6:00 AM. The system will be unavailable during this time.,admin@studentlms.com,1716236400000,1716322800000,true,ALL
+3,New Courses Available,We are excited to announce new courses in Data Science and Artificial Intelligence. Check the course catalog for more information.,admin@studentlms.com,1716409200000,1722000000000,true,STUDENTS
+4,Payment Reminder,This is a friendly reminder to complete any pending payments for your registered courses before the start of the semester.,admin@studentlms.com,1716495600000,1722000000000,true,STUDENTS
+5,Faculty Meeting,All faculty members are requested to attend the semester planning meeting on May 30th at 10:00 AM in the conference room.,admin@studentlms.com,1716582000000,1722000000000,true,ADMINS

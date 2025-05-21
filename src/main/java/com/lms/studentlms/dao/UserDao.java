@@ -11,7 +11,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class UserDao extends BaseDao<User> {
-    private static final String FILE_PATH = "src/main/resources/data/users.txt";
+    private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\users.txt";
 
     public UserDao() {
         super(FILE_PATH);

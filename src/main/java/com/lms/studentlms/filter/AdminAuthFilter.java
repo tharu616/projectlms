@@ -1,6 +1,11 @@
 package com.lms.studentlms.filter;
 
-import jakarta.servlet.*;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,10 +13,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-/**
- * Filter that restricts access to admin pages to authenticated administrators only.
- * Redirects unauthenticated users to the admin login page.
- */
 @WebFilter("/admin/*")
 public class AdminAuthFilter implements Filter {
 
@@ -26,26 +27,18 @@ public class AdminAuthFilter implements Filter {
 
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-        // Get the current path
-        String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-
-        // Skip filter for login page and resources
-        if (path.equals("/admin/login") || path.startsWith("/admin/assets/")) {
-            chain.doFilter(request, response);
-            return;
-        }
-
-        // Check if admin is logged in
         HttpSession session = httpRequest.getSession(false);
-        boolean isLoggedIn = session != null && session.getAttribute("adminEmail") != null;
+
+        boolean isLoggedIn = (session != null && session.getAttribute("adminEmail") != null);
+        String loginURI = httpRequest.getContextPath() + "/login";
+        boolean isLoginRequest = httpRequest.getRequestURI().equals(loginURI);
 
         if (isLoggedIn) {
-            // Admin is logged in, proceed with the request
+            // Admin is logged in, allow the request
             chain.doFilter(request, response);
         } else {
-            // Admin is not logged in, redirect to login page
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/admin/login");
+            // Not logged in, redirect to login page
+            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
         }
     }
 

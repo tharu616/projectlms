@@ -1,0 +1,5 @@
+admin@studentlms.com|LOGIN|Admin login successful|1747803306970
+admin@studentlms.com|LOGIN|Admin login successful|1747803708247
+admin@studentlms.com|LOGIN|Admin login successful|1747803818449
+admin@studentlms.com|LOGIN|Admin login successful|1747804177984
+admin@studentlms.com|LOGOUT|Admin logout|1747804284882

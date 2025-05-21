@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class AdminDao extends BaseDao<Admin> {
-    private static final String FILE_PATH = "src/main/resources/data/admins.txt";
+    private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\admins.txt";
 
     public AdminDao() {
         super(FILE_PATH);

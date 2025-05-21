@@ -21,7 +21,6 @@ import java.util.Map;
 
 @WebServlet("/admin/dashboard")
 public class DashboardServlet extends HttpServlet {
-
     private UserDao userDao;
     private CourseDao courseDao;
     private RegistrationDao registrationDao;
@@ -43,26 +42,31 @@ public class DashboardServlet extends HttpServlet {
         // Check if admin is logged in
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("adminEmail") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        // Get statistics for dashboard
-        Map<String, Object> stats = new HashMap<>();
-        stats.put("totalUsers", userDao.getTotalUserCount());
-        stats.put("totalCourses", courseDao.getTotalCourseCount());
-        stats.put("totalRegistrations", registrationDao.getTotalRegistrationCount());
-        stats.put("totalRevenue", paymentDao.getTotalRevenue());
-        stats.put("pendingRegistrations", registrationDao.getPendingRegistrationsCount());
+        try {
+            // Get statistics for dashboard
+            Map<String, Object> stats = new HashMap<>();
+            stats.put("totalUsers", userDao.getTotalUserCount());
+            stats.put("totalCourses", courseDao.getTotalCourseCount());
+            stats.put("totalRegistrations", registrationDao.getTotalRegistrationCount());
+            stats.put("totalRevenue", paymentDao.getTotalRevenue());
+            stats.put("pendingRegistrations", registrationDao.getPendingRegistrationsCount());
 
-        // Get recent activity logs
-        List<AdminLog> recentLogs = adminLogDao.getRecentLogs(10);
+            // Get recent activity logs
+            List<AdminLog> recentLogs = adminLogDao.getRecentLogs(10);
 
-        // Set attributes for the JSP
-        request.setAttribute("stats", stats);
-        request.setAttribute("recentLogs", recentLogs);
+            // Set attributes for the JSP
+            request.setAttribute("stats", stats);
+            request.setAttribute("recentLogs", recentLogs);
 
-        // Forward to the dashboard JSP
-        request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
+            // Forward to the dashboard JSP
+            request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect(request.getContextPath() + "/error.jsp");
+        }
     }
 }

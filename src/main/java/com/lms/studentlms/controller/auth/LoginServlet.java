@@ -3,9 +3,9 @@ package com.lms.studentlms.controller.auth;
 import com.lms.studentlms.dao.UserDao;
 import com.lms.studentlms.dao.AdminDao;
 import com.lms.studentlms.dao.AdminLogDao;
-
 import com.lms.studentlms.model.Admin;
 import com.lms.studentlms.model.User;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +18,6 @@ import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
     private UserDao userDao;
     private AdminDao adminDao;
     private AdminLogDao adminLogDao;
@@ -66,7 +65,6 @@ public class LoginServlet extends HttpServlet {
         // Check if admin login
         if ("admin".equals(userType)) {
             boolean isValidAdmin = adminDao.validateAdmin(email, password);
-
             if (isValidAdmin) {
                 // Create session for admin
                 HttpSession session = request.getSession();
@@ -95,7 +93,6 @@ public class LoginServlet extends HttpServlet {
 
         // Regular user login
         boolean isValidUser = userDao.validateUser(email, password);
-
         if (isValidUser) {
             // Create session for user
             HttpSession session = request.getSession();
