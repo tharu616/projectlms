@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
+//extends keyword indicates inheritance
 public class AdminLogDao extends BaseDao<AdminLog> {
     private static final String FILE_PATH = "src/main/resources/data/admin_logs.txt";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
