@@ -9,3 +9,4 @@ michael.brown@example.com,Michael Brown,ENG102,English Composition,15000.00,DEBI
 robert.wilson@example.com,Robert Wilson,BIO150,Introduction to Biology,28000.00,CREDIT_CARD,TRX901234,1716841200000
 emily.davis@example.com,Emily Davis,PHYS201,Physics Mechanics,32000.00,BANK_TRANSFER,TRX012345,1716927600000
 tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,CREDIT_CARD,TXN5137E4A7,1747859537305
+rashal23@gmail.com,rasal shashin,BA101,Business Analytics,55000.0,CREDIT_CARD,TRX89E292CC,1747868475629

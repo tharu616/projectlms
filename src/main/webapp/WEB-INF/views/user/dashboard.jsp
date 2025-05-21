@@ -13,6 +13,13 @@
 <div class="min-h-screen flex">
     <!-- Sidebar -->
     <jsp:include page="../shared/user-sidebar.jsp" />
+    <li class="mb-2">
+        <a href="${pageContext.request.contextPath}/user/payment/history" class="block px-6 py-3 hover:bg-blue-700 transition">
+            <i class="fas fa-history mr-3"></i> Payment History
+        </a>
+    </li>
+
+
 
     <!-- Main Content -->
     <div class="flex-1 p-10">

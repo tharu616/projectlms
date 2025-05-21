@@ -55,6 +55,7 @@ public class CourseRegistrationServlet extends HttpServlet {
 
         // Set course attribute for the JSP
         request.setAttribute("course", course);
+
         // Forward to the registration confirmation JSP
         request.getRequestDispatcher("/WEB-INF/views/user/courses/details.jsp").forward(request, response);
     }
@@ -70,6 +71,7 @@ public class CourseRegistrationServlet extends HttpServlet {
         }
 
         String userEmail = (String) session.getAttribute("userEmail");
+
         // Get course code from request
         String courseCode = request.getParameter("courseCode");
         if (courseCode == null || courseCode.isEmpty()) {

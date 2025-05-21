@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PaymentDao extends BaseDao<PaymentRecord> {
-    private static final String FILE_PATH = "src/main/resources/data/payments.txt";
-    private static final String PAYMENT_RECORDS_PATH = "src/main/resources/data/payment_records.txt";
+    private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\ payments.txt";
+    private static final String PAYMENT_RECORDS_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\payment_records.txt";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public PaymentDao() {
@@ -38,6 +38,10 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
     }
 
     public List<Payment> getPaymentsByEmail(String userEmail) throws IOException {
+        if (!FileUtils.fileExists(FILE_PATH)) {
+            return new ArrayList<>();
+        }
+
         return FileUtils.readLinesFromFile(FILE_PATH).stream()
                 .map(line -> line.split(","))
                 .filter(parts -> parts.length >= 8 && parts[0].equalsIgnoreCase(userEmail))
@@ -55,6 +59,10 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
     }
 
     public Payment getPaymentByTransactionId(String transactionId) throws IOException {
+        if (!FileUtils.fileExists(FILE_PATH)) {
+            return null;
+        }
+
         return FileUtils.readLinesFromFile(FILE_PATH).stream()
                 .map(line -> line.split(","))
                 .filter(parts -> parts.length >= 8 && parts[6].equals(transactionId))
@@ -86,6 +94,10 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
 
     public List<PaymentRecord> getAllPayments() {
         try {
+            if (!FileUtils.fileExists(PAYMENT_RECORDS_PATH)) {
+                return new ArrayList<>();
+            }
+
             return FileUtils.readLinesFromFile(PAYMENT_RECORDS_PATH).stream()
                     .map(this::parsePaymentRecord)
                     .filter(record -> record != null)
@@ -117,6 +129,10 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
 
     public boolean updatePaymentStatus(String transactionId, String newStatus) {
         try {
+            if (!FileUtils.fileExists(PAYMENT_RECORDS_PATH)) {
+                return false;
+            }
+
             List<String> lines = FileUtils.readLinesFromFile(PAYMENT_RECORDS_PATH);
             List<String> updatedLines = new ArrayList<>();
             boolean updated = false;

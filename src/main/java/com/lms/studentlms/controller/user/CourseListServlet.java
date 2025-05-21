@@ -1,8 +1,8 @@
 package com.lms.studentlms.controller.user;
 
 import com.lms.studentlms.dao.CourseDao;
-
 import com.lms.studentlms.model.Course;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -15,7 +15,6 @@ import java.util.List;
 
 @WebServlet("/user/courses")
 public class CourseListServlet extends HttpServlet {
-
     private CourseDao courseDao;
 
     @Override
