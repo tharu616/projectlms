@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class PaymentDao extends BaseDao<PaymentRecord> {
-    private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\ payments.txt";
-    private static final String PAYMENT_RECORDS_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\payment_records.txt";
+    private static final String FILE_PATH = "src/main/resources/data/payments.txt";
+    private static final String PAYMENT_RECORDS_PATH = "src/main/resources/data/payment_records.txt";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public PaymentDao() {

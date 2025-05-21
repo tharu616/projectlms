@@ -10,3 +10,19 @@ lisa.wang@example.com,Lisa Wang,ML101,Machine Learning,65000.00,School of Comput
 james.taylor@example.com,James Taylor,FDA101,Figure Drawing and Anatomy,60000.00,School of Art,1717273200000
 maria.garcia@example.com,Maria Garcia,FNS101,Food and Nutrition Science,75000.00,School of Life Science,1717359600000
 john.doe@example.com,John Doe,WPHC101,Web Programming with HTML CSS & JavaScript,50000.00,School of Computing,1717446000000
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747859493369
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747859505014
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747859729012
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747860272461
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747860678908
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747861070606
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747861074955
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747861551805
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747861932543
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747861997141
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747862188448
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747862486445
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,School of Business,1747862548086
+tharusharukshan573@gmail.com,tharusha rukshan,DBF101,Digital Banking and Finance,75000.0,School of Business,1747862709705
+tharusharukshan573@gmail.com,tharusha rukshan,DBF101,Digital Banking and Finance,75000.0,School of Business,1747862785870
+tharusharukshan573@gmail.com,tharusha rukshan,DBF101,Digital Banking and Finance,75000.0,School of Business,1747862800132

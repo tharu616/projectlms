@@ -70,3 +70,6 @@ admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 0 registrations from q
 admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 0 registrations from queue|1747858393806
 admin@studentlms.com|PAYMENT_UPDATE|Updated payment status: TRX789012 to FAILED|1747858458708
 admin@studentlms.com|LOGOUT|Admin logout|1747858541935
+admin@studentlms.com|LOGIN|Admin login successful|1747862882256
+admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 16 registrations from queue|1747862888860
+admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 0 registrations from queue|1747862916770
