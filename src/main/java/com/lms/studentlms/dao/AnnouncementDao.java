@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AnnouncementDao extends BaseDao<Announcement> {
-    private static final String FILE_PATH = "src/main/resources/data/announcements.txt";
+    private static final String FILE_PATH = "C:\\Users\\ADMIN\\OneDrive\\Documents\\GitHub\\projectlms\\src\\main\\resources\\data\\announcements.txt";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     private static int nextId = 1;
 
@@ -35,6 +35,7 @@ public class AnnouncementDao extends BaseDao<Announcement> {
             e.printStackTrace();
         }
     }
+
 
     public List<Announcement> findAll() {
         try {
