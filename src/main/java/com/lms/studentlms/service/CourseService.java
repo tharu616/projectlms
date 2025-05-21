@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CourseService {
-
     private CourseDao courseDao;
 
     public CourseService() {
@@ -22,6 +21,7 @@ public class CourseService {
         if (courseCode == null || courseCode.isEmpty()) {
             return null;
         }
+
         return courseDao.getCourseByCode(courseCode);
     }
 
@@ -29,6 +29,7 @@ public class CourseService {
         if (schoolName == null || schoolName.isEmpty()) {
             return List.of();
         }
+
         return courseDao.getCoursesBySchool(schoolName);
     }
 
@@ -70,6 +71,7 @@ public class CourseService {
         if (courseCode == null || courseCode.isEmpty()) {
             return false;
         }
+
         return courseDao.deleteCourse(courseCode);
     }
 
@@ -77,6 +79,7 @@ public class CourseService {
         if (query == null || query.isEmpty()) {
             return List.of();
         }
+
         return courseDao.searchCourses(query);
     }
 

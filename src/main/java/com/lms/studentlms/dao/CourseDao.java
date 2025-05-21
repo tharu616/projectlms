@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class CourseDao extends BaseDao<Course> {
     private static final String FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\courses.txt";
-    private static final String SCHOOLS_FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\schools.txt";
 
     public CourseDao() {
         super(FILE_PATH);
@@ -20,23 +20,8 @@ public class CourseDao extends BaseDao<Course> {
 
     public List<Course> getAllCourses() {
         try {
-            List<String> lines = FileUtils.readLinesFromFile(FILE_PATH);
-            List<Course> courses = new ArrayList<>();
-
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length >= 4) {
-                    Course course = new Course(
-                            parts[0], // courseCode
-                            parts[1], // duration
-                            parts[3]  // fee
-                    );
-                    courses.add(course);
-                }
-            }
-
-            return courses;
-        } catch (IOException e) {
+            return findAll();
+        } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
@@ -44,48 +29,44 @@ public class CourseDao extends BaseDao<Course> {
 
     public Course getCourseByCode(String courseCode) {
         try {
-            List<String> lines = FileUtils.readLinesFromFile(FILE_PATH);
-
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length >= 4 && parts[0].equals(courseCode)) {
-                    return new Course(
-                            parts[0], // courseCode
-                            parts[1], // duration
-                            parts[3]  // fee
-                    );
-                }
-            }
-        } catch (IOException e) {
+            Optional<Course> courseOpt = findAll().stream()
+                    .filter(course -> course.getCourseCode().equals(courseCode))
+                    .findFirst();
+            return courseOpt.orElse(null);
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null; // Course not found
     }
 
-    public Course getCourseById(String courseId) {
-        return getCourseByCode(courseId); // In this implementation, id is the same as code
-    }
-
-    public List<Course> getCoursesBySchool(String schoolName) {
+    public List<Course> getCoursesBySchool(String school) {
         try {
-            List<String> lines = FileUtils.readLinesFromFile(FILE_PATH);
-            List<Course> courses = new ArrayList<>();
+            List<Course> allCourses = findAll();
+            return allCourses.stream()
+                    .filter(course -> course.getSchool().equalsIgnoreCase(school))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
 
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length >= 4 && parts[2].equals(schoolName)) {
-                    Course course = new Course(
-                            parts[0], // courseCode
-                            parts[1], // duration
-                            parts[3]  // fee
-                    );
-                    courses.add(course);
-                }
+    public List<Course> searchCourses(String query) {
+        try {
+            if (query == null || query.trim().isEmpty()) {
+                return getAllCourses();
             }
 
-            return courses;
-        } catch (IOException e) {
+            String lowercaseQuery = query.toLowerCase();
+            List<Course> allCourses = findAll();
+
+            return allCourses.stream()
+                    .filter(course ->
+                            course.getCourseName().toLowerCase().contains(lowercaseQuery) ||
+                                    course.getCourseCode().toLowerCase().contains(lowercaseQuery) ||
+                                    course.getDescription().toLowerCase().contains(lowercaseQuery))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
@@ -93,151 +74,138 @@ public class CourseDao extends BaseDao<Course> {
 
     public List<String> getAllSchools() {
         try {
-            List<String> lines = FileUtils.readLinesFromFile(SCHOOLS_FILE_PATH);
-            return lines.stream()
-                    .filter(line -> !line.trim().isEmpty())
+            List<Course> allCourses = findAll();
+            return allCourses.stream()
+                    .map(Course::getSchool)
+                    .distinct()
+                    .sorted()
                     .collect(Collectors.toList());
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
         }
     }
 
-    public boolean createCourse(String schoolName, Course course) {
+    public boolean saveCourse(Course course) {
         try {
-            List<String> lines = new ArrayList<>();
-            lines.add(course.getCourseCode() + "," +
-                    course.getDuration() + "," +
-                    schoolName + "," +
-                    course.getFee());
+            return save(course);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-            FileUtils.writeLinesToFile(FILE_PATH, lines, true); // append mode
-            return true;
-        } catch (IOException e) {
+    public boolean createCourse(String schoolName, Course course) {
+        course.setSchool(schoolName);
+        return saveCourse(course);
+    }
+
+    public boolean updateCourse(Course course) {
+        try {
+            List<Course> courses = findAll();
+            List<Course> updatedCourses = new ArrayList<>();
+            boolean updated = false;
+
+            for (Course existingCourse : courses) {
+                if (existingCourse.getCourseCode().equals(course.getCourseCode())) {
+                    updatedCourses.add(course);
+                    updated = true;
+                } else {
+                    updatedCourses.add(existingCourse);
+                }
+            }
+
+            if (updated) {
+                return saveAllOverwrite(updatedCourses);
+            }
+
+            return false;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
     public boolean updateCourse(String schoolName, Course course) {
-        try {
-            List<String> allLines = FileUtils.readLinesFromFile(FILE_PATH);
-            List<String> updatedLines = new ArrayList<>();
-            boolean updated = false;
-
-            for (String line : allLines) {
-                String[] parts = line.split(",");
-                if (parts.length >= 4 && parts[0].equals(course.getCourseCode())) {
-                    // This is the course to update
-                    updatedLines.add(course.getCourseCode() + "," +
-                            course.getDuration() + "," +
-                            schoolName + "," +
-                            course.getFee());
-                    updated = true;
-                } else {
-                    updatedLines.add(line);
-                }
-            }
-
-            if (updated) {
-                FileUtils.writeLinesToFile(FILE_PATH, updatedLines, false); // overwrite mode
-                return true;
-            }
-
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
+        course.setSchool(schoolName);
+        return updateCourse(course);
     }
 
     public boolean deleteCourse(String courseCode) {
         try {
-            List<String> allLines = FileUtils.readLinesFromFile(FILE_PATH);
-            List<String> updatedLines = allLines.stream()
-                    .filter(line -> {
-                        String[] parts = line.split(",");
-                        return parts.length < 4 || !parts[0].equals(courseCode);
-                    })
+            List<Course> courses = findAll();
+            List<Course> updatedCourses = courses.stream()
+                    .filter(course -> !course.getCourseCode().equals(courseCode))
                     .collect(Collectors.toList());
 
-            if (updatedLines.size() < allLines.size()) {
-                FileUtils.writeLinesToFile(FILE_PATH, updatedLines, false); // overwrite mode
-                return true;
+            if (updatedCourses.size() < courses.size()) {
+                return saveAllOverwrite(updatedCourses);
             }
 
             return false;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public List<Course> searchCourses(String query) {
-        query = query.toLowerCase();
-        List<Course> allCourses = getAllCourses();
-
-        String finalQuery = query;
-        return allCourses.stream()
-                .filter(course ->
-                        course.getCourseCode().toLowerCase().contains(finalQuery) ||
-                                course.getDuration().toLowerCase().contains(finalQuery) ||
-                                course.getFee().toLowerCase().contains(finalQuery))
-                .collect(Collectors.toList());
-    }
-
     public int getTotalCourseCount() {
         try {
-            List<String> lines = FileUtils.readLinesFromFile(FILE_PATH);
-            return (int) lines.stream()
-                    .filter(line -> !line.trim().isEmpty())
-                    .count();
-        } catch (IOException e) {
+            return findAll().size();
+        } catch (Exception e) {
             e.printStackTrace();
             return 0;
         }
     }
 
     public Map<String, Integer> getCourseCountBySchool() {
-        Map<String, Integer> countMap = new HashMap<>();
-
         try {
-            List<String> lines = FileUtils.readLinesFromFile(FILE_PATH);
+            List<Course> courses = findAll();
+            Map<String, Integer> countBySchool = new HashMap<>();
 
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length >= 4) {
-                    String school = parts[2];
-                    countMap.put(school, countMap.getOrDefault(school, 0) + 1);
-                }
+            for (Course course : courses) {
+                String school = course.getSchool();
+                countBySchool.put(school, countBySchool.getOrDefault(school, 0) + 1);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return countMap;
+            return countBySchool;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new HashMap<>();
+        }
     }
 
     @Override
     protected Course mapEntityFromLine(String line) {
-        String[] parts = line.split(",");
-        if (parts.length >= 4) {
-            return new Course(
-                    parts[0], // courseCode
-                    parts[1], // duration
-                    parts[3]  // fee
-            );
+        try {
+            String[] parts = line.split(",");
+            if (parts.length >= 8) {
+                Course course = new Course();
+                course.setCourseCode(parts[0]);
+                course.setCourseName(parts[1]);
+                course.setDuration(parts[2]);
+                course.setSchool(parts[3]);
+                course.setFee(Double.parseDouble(parts[4]));
+                course.setDescription(parts[5]);
+                course.setPrerequisites(parts[6]);
+                course.setLearningOutcomes(parts[7]);
+                return course;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }
 
     @Override
     protected String mapEntityToLine(Course course) {
-        // Note: This doesn't include the school name, which is needed for the file format
-        // This method should be used with caution or modified to include school
         return course.getCourseCode() + "," +
+                course.getCourseName() + "," +
                 course.getDuration() + "," +
-                "Unknown School" + "," + // Placeholder
-                course.getFee();
+                course.getSchool() + "," +
+                course.getFee() + "," +
+                course.getDescription() + "," +
+                course.getPrerequisites() + "," +
+                course.getLearningOutcomes();
     }
 }

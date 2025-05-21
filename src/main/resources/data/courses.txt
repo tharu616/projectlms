@@ -1,5 +1,34 @@
-CS101,Introduction to Computer Science,3 months,Computer Science,25000.00,This course introduces the fundamentals of computer science and programming.,None,Learn basic programming concepts and problem-solving skills.
-MATH201,Advanced Mathematics,4 months,Mathematics,30000.00,A comprehensive study of advanced mathematical concepts.,MATH101,Develop analytical thinking and mathematical reasoning abilities.
-ENG102,English Composition,2 months,Languages,15000.00,Improve your writing skills and learn effective communication.,ENG101,Master essay writing and critical analysis.
-BIO150,Introduction to Biology,3 months,Life Sciences,28000.00,Study the basic principles of biology and life sciences.,None,Understand the fundamentals of living organisms and biological processes.
-PHYS201,Physics Mechanics,4 months,Physical Sciences,32000.00,Learn about classical mechanics and physical laws.,MATH101,Apply mathematical concepts to solve physics problems.
+DM101,Digital Marketing,03 months,School of Business,42000.00,Learn digital marketing strategies and techniques.,None,Develop skills in SEO, social media marketing, and online advertising.
+BM101,Business Management,06 months,School of Business,75000.00,Comprehensive study of business management principles.,None,Develop leadership skills and business acumen.
+PCM101,Professional Certificate in Marketing,04 months,School of Business,44000.00,Advanced marketing concepts and strategies.,Basic marketing knowledge,Master professional marketing techniques and strategies.
+DBF101,Digital Banking and Finance,05 months,School of Business,75000.00,Study of digital banking systems and financial technologies.,Basic finance knowledge,Understand digital financial systems and technologies.
+FMA101,Financial and Management Accounting,04 months,School of Business,70000.00,Principles of financial and management accounting.,None,Develop skills in financial analysis and management accounting.
+BA101,Business Analytics,05 months,School of Business,55000.00,Data-driven business decision making.,Basic statistics knowledge,Apply analytical techniques to business problems.
+BL101,Business Law,06 months,School of Business,58000.00,Legal aspects of business operations.,None,Understand legal frameworks governing business operations.
+IB101,International Business,06 months,School of Business,70000.00,Global business operations and strategies.,Basic business knowledge,Develop understanding of international business practices.
+EAP101,English for Academic Purposes,04 months,School of English,40000.00,English language skills for academic settings.,Basic English proficiency,Improve academic writing and communication skills.
+PSC101,Public Speaking and Communication,04 months,School of English,45000.00,Effective public speaking and communication techniques.,Basic English proficiency,Develop confidence in public speaking and communication.
+LSS101,Listening and Speaking Skills,03 months,School of English,30000.00,Improve English listening and speaking abilities.,Basic English proficiency,Enhance listening comprehension and speaking fluency.
+IELTS101,British Council IELTS Course,05 months,School of English,55000.00,Preparation for IELTS examination.,Intermediate English proficiency,Achieve target IELTS score and improve English skills.
+BL201,British Literature,05 months,School of English,58000.00,Study of major British literary works and authors.,Basic English proficiency,Develop critical analysis skills and literary appreciation.
+ML101,Machine Learning,06 months,School of Computing,65000.00,Principles and applications of machine learning.,Programming knowledge,Implement machine learning algorithms and models.
+CSAI101,Computer Science with Artificial Intelligence,05 months,School of Computing,52000.00,Computer science fundamentals with AI focus.,Basic programming knowledge,Develop AI applications and understand core CS concepts.
+NS101,Network Security,04 months,School of Computing,38000.00,Security principles for computer networks.,Basic networking knowledge,Implement network security measures and protocols.
+CPL101,C Programming Language,04 months,School of Computing,49000.00,Fundamentals of C programming language.,None,Write efficient C programs and understand memory management.
+AMWD101,Advanced Multimedia Web Design & Development Techniques,05 months,School of Computing,55000.00,Advanced web design and development techniques.,Basic web development knowledge,Create sophisticated multimedia websites and applications.
+WPHC101,Web Programming with HTML, CSS & JavaScript,06 months,School of Computing,50000.00,Web development fundamentals using HTML, CSS, and JavaScript.,None,Build interactive websites and web applications.
+APP101,Advanced Programming in Python,04 months,School of Computing,45000.00,Advanced Python programming concepts and applications.,Basic Python knowledge,Develop complex Python applications and libraries.
+CG101,Computer Graphics,05 months,School of Computing,55000.00,Principles and techniques of computer graphics.,Basic programming knowledge,Create 2D and 3D graphics applications.
+CC101,Cloud Computing,05 months,School of Computing,60000.00,Cloud computing technologies and services.,Basic networking knowledge,Deploy and manage applications in cloud environments.
+IOT101,Internet of Things (IoT),04 months,School of Computing,44000.00,IoT concepts, technologies, and applications.,Basic electronics and programming,Develop IoT solutions and connected devices.
+LTLS101,Lab Techniques in Life Sciences,06 months,School of Life Science,55000.00,Laboratory techniques used in life sciences research.,Basic biology knowledge,Perform standard laboratory procedures in life sciences.
+FNS101,Food and Nutrition Science,06 months,School of Life Science,75000.00,Principles of food science and nutrition.,Basic chemistry and biology,Understand nutritional requirements and food composition.
+EB101,Environmental Biology,06 months,School of Life Science,68000.00,Study of organisms and their interactions with the environment.,Basic biology knowledge,Analyze environmental impacts and ecosystem dynamics.
+CMB101,Cell & Molecular Biology,06 months,School of Life Science,78000.00,Study of cellular and molecular processes in living organisms.,Basic biology and chemistry,Understand cellular mechanisms and molecular techniques.
+PHE101,Public Health & Epidemiology,06 months,School of Life Science,60000.00,Principles of public health and disease spread.,Basic biology knowledge,Analyze health trends and disease patterns in populations.
+FDA101,Figure Drawing and Anatomy,04 months,School of Art,60000.00,Techniques for drawing human figures and anatomy.,None,Create anatomically accurate figure drawings.
+ATP101,Acting & Theatre Performance,07 months,School of Art,75000.00,Acting techniques and theatrical performance.,None,Perform theatrical roles and understand performance theory.
+MMIA101,Mixed Media & Installation Art,06 months,School of Art,72000.00,Creating art using multiple media and installation techniques.,Basic art knowledge,Create mixed media artworks and installations.
+VST101,Voice and Speech Training,06 months,School of Art,65000.00,Techniques for voice projection and speech clarity.,None,Improve vocal range, projection, and speech clarity.
+BDS101,Basic Direction and Scriptwriting,07 months,School of Art,75000.00,Fundamentals of direction and scriptwriting for film and theater.,None,Write scripts and direct basic performances.
+FSC101,Film Studies & Cinematography,12 months,School of Art,100000.00,Study of film theory and cinematography techniques.,None,Analyze films critically and create cinematographic works.

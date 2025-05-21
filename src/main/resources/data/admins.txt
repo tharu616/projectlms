@@ -1,3 +1,4 @@
 Admin User,admin,admin@studentlms.com,$2a$10$miJT8U3D81BEaQItptc9hOuDYm8rs3Su0vNqPBnnYPTbfIk93J.wS,ADMIN
 System Administrator,sysadmin,sysadmin@studentlms.com,$2a$10$b3II4bvUPDq7mxMeAIb.YOcO3w5JxvmQYl056pLAn2LYX.xVbglTa,ADMIN
 Jane Doe,janedoe,jane.doe@studentlms.com,$2a$10$Y6uwvEPJCDln5WiMBu6vZ.2s8IthIyYhfSL2fEYsfQYuqL3G6YZKW,ADMIN
+Vishva,vishva@gmail.com,$2a$10$HYiXNn3tDEHYnIqfO7FQr.KCtPdgY6ARLop7ONxRGSSs4duLmHmve,ADMIN

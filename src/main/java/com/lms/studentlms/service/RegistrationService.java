@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RegistrationService {
-
     private RegistrationDao registrationDao;
     private CourseDao courseDao;
     private UserDao userDao;
@@ -65,9 +64,9 @@ public class RegistrationService {
                     userEmail,
                     user.getFullName(),
                     courseCode,
-                    course.getCourseCode(), // This might be redundant
-                    course.getFee(),
-                    "Unknown School" // This should be improved to get the actual school
+                    course.getCourseName(),
+                    String.valueOf(course.getFee()),  // Convert double to String
+                    course.getSchool()  // Get the actual school name
             );
 
             return registrationDao.saveRegistration(registration);

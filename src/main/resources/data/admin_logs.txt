@@ -3,3 +3,18 @@ admin@studentlms.com|LOGIN|Admin login successful|1747803708247
 admin@studentlms.com|LOGIN|Admin login successful|1747803818449
 admin@studentlms.com|LOGIN|Admin login successful|1747804177984
 admin@studentlms.com|LOGOUT|Admin logout|1747804284882
+admin@studentlms.com|LOGIN|Admin login successful|1747810757149
+admin@studentlms.com|USER_UPDATE|Updated user: tharusharukshan573@gmail.com|1747810795396
+admin@studentlms.com|LOGIN|Admin login successful|1747811942059
+admin@studentlms.com|LOGIN|Admin login successful|1747812431766
+admin@studentlms.com|LOGIN|Admin login successful|1747812692484
+admin@studentlms.com|LOGIN|Admin login successful|1747813068212
+admin@studentlms.com|COURSE_DELETE|Deleted course: CS101|1747813076717
+admin@studentlms.com|LOGIN|Admin login successful|1747813313546
+admin@studentlms.com|LOGIN|Admin login successful|1747813814597
+admin@studentlms.com|USER_DELETE|Deleted user: john.doe@example.com|1747813849581
+admin@studentlms.com|LOGIN|Admin login successful|1747814067294
+admin@studentlms.com|LOGOUT|Admin logout|1747814536070
+admin@studentlms.com|LOGIN|Admin login successful|1747814594824
+admin@studentlms.com|LOGIN|Admin login successful|1747814805069
+admin@studentlms.com|LOGIN|Admin login successful|1747815357726

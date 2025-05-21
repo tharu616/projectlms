@@ -15,30 +15,50 @@ public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
         super(FILE_PATH);
     }
 
-    public List<CourseRegistration> getAllRegistrations() throws IOException {
-        return findAll();
+    public List<CourseRegistration> getAllRegistrations() {
+        try {
+            return findAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
-    public CourseRegistration getRegistrationByEmailAndCourse(String email, String courseCode) throws IOException {
-        List<CourseRegistration> registrations = findAll();
-        return registrations.stream()
-                .filter(r -> r.getStudentEmail().equals(email) && r.getCourseCode().equals(courseCode))
-                .findFirst()
-                .orElse(null);
+    public CourseRegistration getRegistrationByEmailAndCourse(String email, String courseCode) {
+        try {
+            List<CourseRegistration> registrations = findAll();
+            return registrations.stream()
+                    .filter(r -> r.getStudentEmail().equals(email) && r.getCourseCode().equals(courseCode))
+                    .findFirst()
+                    .orElse(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
-    public List<CourseRegistration> getRegistrationsByEmail(String email) throws IOException {
-        List<CourseRegistration> registrations = findAll();
-        return registrations.stream()
-                .filter(r -> r.getStudentEmail().equals(email))
-                .collect(Collectors.toList());
+    public List<CourseRegistration> getRegistrationsByEmail(String email) {
+        try {
+            List<CourseRegistration> registrations = findAll();
+            return registrations.stream()
+                    .filter(r -> r.getStudentEmail().equals(email))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
-    public List<CourseRegistration> getRegistrationsByCourse(String courseCode) throws IOException {
-        List<CourseRegistration> registrations = findAll();
-        return registrations.stream()
-                .filter(r -> r.getCourseCode().equals(courseCode))
-                .collect(Collectors.toList());
+    public List<CourseRegistration> getRegistrationsByCourse(String courseCode) {
+        try {
+            List<CourseRegistration> registrations = findAll();
+            return registrations.stream()
+                    .filter(r -> r.getCourseCode().equals(courseCode))
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
     public boolean saveRegistration(CourseRegistration registration) {
@@ -65,6 +85,26 @@ public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public boolean isUserRegisteredForCourse(String email, String courseCode) {
+        CourseRegistration registration = getRegistrationByEmailAndCourse(email, courseCode);
+        return registration != null;
+    }
+
+    public int getTotalRegistrationCount() {
+        try {
+            return findAll().size();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    public int getPendingRegistrationsCount() {
+        // Implement this based on your business logic
+        // For example, if you have a status field in CourseRegistration
+        return 0;
     }
 
     @Override
