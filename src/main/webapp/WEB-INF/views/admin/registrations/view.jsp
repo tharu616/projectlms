@@ -12,7 +12,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registration Details - Student LMS</title>
+  <title>Registration Details - Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -23,192 +23,113 @@
 
   <!-- Main Content -->
   <div class="flex-1 p-10">
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-3xl font-bold text-gray-800">Registration Details</h1>
-      <div class="flex space-x-2">
-        <a href="${pageContext.request.contextPath}/admin/registrations/edit/${registration.studentEmail}/${registration.courseCode}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition flex items-center">
-          <i class="fas fa-edit mr-2"></i> Edit Registration
-        </a>
-        <a href="${pageContext.request.contextPath}/admin/registrations" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md transition flex items-center">
-          <i class="fas fa-arrow-left mr-2"></i> Back to Registrations
-        </a>
-      </div>
+    <div class="mb-6">
+      <a href="${pageContext.request.contextPath}/admin/registrations" class="text-blue-500 hover:underline">
+        <i class="fas fa-arrow-left mr-2"></i> Back to Registrations
+      </a>
     </div>
 
-    <!-- Registration Details -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
-      <!-- Header -->
-      <div class="bg-blue-500 text-white p-6">
-        <div class="flex items-center">
-          <div class="flex-shrink-0 h-24 w-24 bg-white rounded-full flex items-center justify-center text-blue-500 text-3xl font-bold">
-            ${registration.studentName.charAt(0)}
-          </div>
-          <div class="ml-6">
-            <h2 class="text-2xl font-bold">${registration.studentName}</h2>
-            <p class="text-blue-100">${registration.studentEmail}</p>
-            <p class="text-blue-100">Course: ${registration.courseCode} - ${registration.courseName}</p>
-          </div>
-        </div>
+      <!-- Registration Header -->
+      <div class="bg-blue-600 text-white p-6">
+        <h1 class="text-3xl font-bold">Registration Details</h1>
+        <p class="text-blue-100 mt-2">Student: ${registration.studentEmail}</p>
+        <p class="text-blue-100 mt-1">Course: ${registration.courseCode} - ${registration.courseName}</p>
       </div>
 
-      <!-- Registration Information -->
+      <!-- Registration Details -->
       <div class="p-6">
-        <!-- Student Information -->
-        <div class="mb-8">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Student Information</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
-            <div>
-              <p class="text-sm text-gray-500">Full Name</p>
-              <p class="text-gray-800">${registration.studentName}</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Student Information</h2>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-500">Full Name</h3>
+                <p class="text-lg font-semibold text-gray-800">${registration.studentName}</p>
+              </div>
+              <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-500">Email Address</h3>
+                <p class="text-lg font-semibold text-gray-800">${registration.studentEmail}</p>
+              </div>
             </div>
-            <div>
-              <p class="text-sm text-gray-500">Email Address</p>
-              <p class="text-gray-800">${registration.studentEmail}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-500">Student Profile</p>
-              <a href="${pageContext.request.contextPath}/admin/users/view/${registration.studentEmail}" class="text-blue-500 hover:text-blue-700">
-                View Student Profile
-              </a>
+          </div>
+
+          <div>
+            <h2 class="text-xl font-semibold text-gray-800 mb-4">Course Information</h2>
+            <div class="bg-gray-50 rounded-lg p-4">
+              <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-500">Course Code</h3>
+                <p class="text-lg font-semibold text-gray-800">${registration.courseCode}</p>
+              </div>
+              <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-500">Course Name</h3>
+                <p class="text-lg font-semibold text-gray-800">${registration.courseName}</p>
+              </div>
+              <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-500">School</h3>
+                <p class="text-lg font-semibold text-gray-800">${registration.schoolName}</p>
+              </div>
+              <div class="mb-4">
+                <h3 class="text-sm font-medium text-gray-500">Course Fee</h3>
+                <p class="text-lg font-semibold text-gray-800">₹${registration.courseFee}</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Course Information -->
-        <div class="mb-8">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Course Information</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
-            <div>
-              <p class="text-sm text-gray-500">Course Code</p>
-              <p class="text-gray-800">${registration.courseCode}</p>
+        <div class="mb-6">
+          <h2 class="text-xl font-semibold text-gray-800 mb-4">Registration Details</h2>
+          <div class="bg-gray-50 rounded-lg p-4">
+            <div class="mb-4">
+              <h3 class="text-sm font-medium text-gray-500">Registration Date</h3>
+              <p class="text-lg font-semibold text-gray-800">${registration.formattedDate}</p>
             </div>
-            <div>
-              <p class="text-sm text-gray-500">Course Name</p>
-              <p class="text-gray-800">${registration.courseName}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-500">School</p>
-              <p class="text-gray-800">${registration.schoolName}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-500">Course Fee</p>
-              <p class="text-gray-800">${registration.courseFee}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-500">Course Details</p>
-              <a href="${pageContext.request.contextPath}/admin/courses/view/${registration.courseCode}" class="text-blue-500 hover:text-blue-700">
-                View Course Details
-              </a>
+            <div class="mb-4">
+              <h3 class="text-sm font-medium text-gray-500">Status</h3>
+              <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                    Active
+                                </span>
             </div>
           </div>
         </div>
 
-        <!-- Registration Details -->
-        <div class="mb-8">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Registration Details</h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
-            <div>
-              <p class="text-sm text-gray-500">Registration Date</p>
-              <p class="text-gray-800">${registration.formattedDate}</p>
-            </div>
-            <div>
-              <p class="text-sm text-gray-500">Status</p>
-              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                    ${registration.status == 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                                      registration.status == 'APPROVED' ? 'bg-green-100 text-green-800' :
-                                      registration.status == 'COMPLETED' ? 'bg-blue-100 text-blue-800' :
-                                      'bg-gray-100 text-gray-800'}">
-                ${registration.status}
-              </span>
-            </div>
-            <div class="md:col-span-2">
-              <p class="text-sm text-gray-500">Notes</p>
-              <p class="text-gray-800">${registration.notes}</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Payment Information -->
-        <div>
-          <h3 class="text-lg font-semibold text-gray-800 mb-4 border-b pb-2">Payment Information</h3>
-
-          <c:if test="${not empty payment}">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-y-4">
-              <div>
-                <p class="text-sm text-gray-500">Payment ID</p>
-                <p class="text-gray-800">${payment.transactionId}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-500">Payment Date</p>
-                <p class="text-gray-800">${payment.formattedDate}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-500">Amount</p>
-                <p class="text-gray-800">${payment.amount}</p>
-              </div>
-              <div>
-                <p class="text-sm text-gray-500">Status</p>
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
-                                        ${payment.status == 'PENDING' ? 'bg-yellow-100 text-yellow-800' :
-                                          payment.status == 'COMPLETED' ? 'bg-green-100 text-green-800' :
-                                          payment.status == 'FAILED' ? 'bg-red-100 text-red-800' :
-                                          'bg-gray-100 text-gray-800'}">
-                    ${payment.status}
-                </span>
-              </div>
-              <div>
-                <p class="text-sm text-gray-500">Payment Details</p>
-                <a href="${pageContext.request.contextPath}/admin/payments/view/${payment.transactionId}" class="text-blue-500 hover:text-blue-700">
-                  View Payment Details
-                </a>
-              </div>
-            </div>
-          </c:if>
-
-          <c:if test="${empty payment}">
-            <div class="bg-yellow-50 p-4 rounded-md">
-              <div class="flex">
-                <div class="flex-shrink-0">
-                  <i class="fas fa-exclamation-circle text-yellow-400"></i>
-                </div>
-                <div class="ml-3">
-                  <p class="text-sm text-yellow-700">
-                    No payment record found for this registration.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </c:if>
+        <!-- Action Buttons -->
+        <div class="mt-8 flex justify-end space-x-4">
+          <a href="#" onclick="confirmDelete('${registration.studentEmail}', '${registration.courseCode}', '${registration.studentName}')" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-md">
+            <i class="fas fa-trash mr-2"></i> Delete Registration
+          </a>
         </div>
       </div>
-    </div>
-
-    <!-- Activity Log -->
-    <div class="mt-8 bg-white rounded-lg shadow-md p-6">
-      <h2 class="text-xl font-semibold text-gray-800 mb-4">Activity Log</h2>
-
-      <c:if test="${not empty activityLogs}">
-        <div class="space-y-4">
-          <c:forEach var="log" items="${activityLogs}">
-            <div class="border-l-4 border-blue-500 pl-4 py-2">
-              <div class="flex justify-between">
-                <p class="text-sm font-medium text-gray-800">${log.action}</p>
-                <p class="text-xs text-gray-500">${log.formattedTimestamp}</p>
-              </div>
-              <p class="text-sm text-gray-600 mt-1">${log.description}</p>
-              <p class="text-xs text-gray-500 mt-1">By: ${log.adminEmail}</p>
-            </div>
-          </c:forEach>
-        </div>
-      </c:if>
-
-      <c:if test="${empty activityLogs}">
-        <div class="bg-gray-50 p-4 rounded-md text-center">
-          <p class="text-gray-500">No activity logs found for this registration.</p>
-        </div>
-      </c:if>
     </div>
   </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div id="deleteModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center hidden">
+  <div class="bg-white rounded-lg p-8 max-w-md">
+    <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+    <p class="mb-6">Are you sure you want to delete the registration for <span id="studentToDelete" class="font-semibold"></span>? This action cannot be undone.</p>
+    <div class="flex justify-end space-x-4">
+      <button onclick="closeModal()" class="bg-gray-300 hover:bg-gray-400 text-gray-800 py-2 px-4 rounded">
+        Cancel
+      </button>
+      <a id="deleteLink" href="#" class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  function confirmDelete(email, courseCode, studentName) {
+    document.getElementById('studentToDelete').textContent = studentName;
+    document.getElementById('deleteLink').href = "${pageContext.request.contextPath}/admin/registrations/delete/" + email + "/" + courseCode;
+    document.getElementById('deleteModal').classList.remove('hidden');
+  }
+
+  function closeModal() {
+    document.getElementById('deleteModal').classList.add('hidden');
+  }
+</script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,6 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
 
     public boolean savePayment(Payment payment) throws IOException {
         List<String> lines = new ArrayList<>();
-
         // Format: studentEmail,studentName,courseCode,courseName,courseFee,paymentMethod,transactionId,timestamp
         lines.add(payment.getStudentEmail() + "," +
                 payment.getStudentName() + "," +
@@ -73,7 +73,6 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
     }
 
     // Methods for PaymentRecord handling
-
     public boolean savePaymentRecord(PaymentRecord record) {
         try {
             List<String> lines = new ArrayList<>();
@@ -95,6 +94,13 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
             e.printStackTrace();
             return new ArrayList<>();
         }
+    }
+
+    public PaymentRecord getPaymentRecordByTransactionId(String transactionId) {
+        return getAllPayments().stream()
+                .filter(record -> record.getTransactionId().equals(transactionId))
+                .findFirst()
+                .orElse(null);
     }
 
     public List<PaymentRecord> getPaymentRecordsByEmail(String email) {
@@ -150,6 +156,18 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
                 .sum();
     }
 
+    public int getPendingPaymentsCount() {
+        return (int) getAllPayments().stream()
+                .filter(record -> "PENDING".equals(record.getStatus()))
+                .count();
+    }
+
+    public int getCompletedPaymentsCount() {
+        return (int) getAllPayments().stream()
+                .filter(record -> "COMPLETED".equals(record.getStatus()))
+                .count();
+    }
+
     private String formatPaymentRecord(PaymentRecord record) {
         return record.getStudentEmail() + "," +
                 record.getTransactionId() + "," +
@@ -169,12 +187,13 @@ public class PaymentDao extends BaseDao<PaymentRecord> {
                         dateFormat.parse(parts[2]), // date
                         parts[3], // description
                         Double.parseDouble(parts[4]), // amount
-                        parts[5]  // status
+                        parts[5] // status
                 );
             }
         } catch (ParseException | NumberFormatException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 

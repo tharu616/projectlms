@@ -1,5 +1,2 @@
-john.doe@example.com,John Doe,CS101,Introduction to Computer Science,25000.00,Computer Science,1716236400000
-jane.smith@example.com,Jane Smith,MATH201,Advanced Mathematics,30000.00,Mathematics,1716322800000
-sarah.johnson@example.com,Sarah Johnson,ENG102,English Composition,15000.00,Languages,1716409200000
 michael.brown@example.com,Michael Brown,BIO150,Introduction to Biology,28000.00,Life Sciences,1716495600000
 john.doe@example.com,John Doe,PHYS201,Physics Mechanics,32000.00,Physical Sciences,1716582000000

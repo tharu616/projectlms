@@ -1,0 +1,10 @@
+sarah.johnson@example.com,Sarah Johnson,CS101,Introduction to Computer Science,25000.00,Computer Science,1716668400000
+michael.brown@example.com,Michael Brown,MATH201,Advanced Mathematics,30000.00,Mathematics,1716754800000
+jane.smith@example.com,Jane Smith,BIO150,Introduction to Biology,28000.00,Life Sciences,1716841200000
+robert.wilson@example.com,Robert Wilson,ENG102,English Composition,15000.00,Languages,1716927600000
+emily.davis@example.com,Emily Davis,PHYS201,Physics Mechanics,32000.00,Physical Sciences,1717014000000
+david.miller@example.com,David Miller,DM101,Digital Marketing,42000.00,School of Business,1717100400000
+lisa.wang@example.com,Lisa Wang,ML101,Machine Learning,65000.00,School of Computing,1717186800000
+james.taylor@example.com,James Taylor,FDA101,Figure Drawing and Anatomy,60000.00,School of Art,1717273200000
+maria.garcia@example.com,Maria Garcia,FNS101,Food and Nutrition Science,75000.00,School of Life Science,1717359600000
+john.doe@example.com,John Doe,WPHC101,Web Programming with HTML CSS & JavaScript,50000.00,School of Computing,1717446000000

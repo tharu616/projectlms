@@ -85,7 +85,6 @@ public class AnnouncementDao extends BaseDao<Announcement> {
             List<String> allLines = FileUtils.readLinesFromFile(FILE_PATH);
             List<String> updatedLines = new ArrayList<>();
             boolean updated = false;
-
             for (String line : allLines) {
                 Announcement existing = mapEntityFromLine(line);
                 if (existing != null && existing.getId() == announcement.getId()) {
@@ -117,7 +116,6 @@ public class AnnouncementDao extends BaseDao<Announcement> {
                         return announcement == null || announcement.getId() != id;
                     })
                     .collect(Collectors.toList());
-
             if (updatedLines.size() < allLines.size()) {
                 FileUtils.writeLinesToFile(FILE_PATH, updatedLines, false); // overwrite mode
                 return true;
@@ -140,7 +138,6 @@ public class AnnouncementDao extends BaseDao<Announcement> {
                 announcement.setTitle(parts[1]);
                 announcement.setContent(parts[2]);
                 announcement.setPublishDate(dateFormat.parse(parts[3]));
-
                 if (parts.length > 4 && !parts[4].equals("null")) {
                     announcement.setExpiryDate(dateFormat.parse(parts[4]));
                 }
@@ -160,6 +157,7 @@ public class AnnouncementDao extends BaseDao<Announcement> {
         } catch (ParseException | NumberFormatException e) {
             e.printStackTrace();
         }
+
         return null;
     }
 
@@ -167,7 +165,6 @@ public class AnnouncementDao extends BaseDao<Announcement> {
     protected String mapEntityToLine(Announcement announcement) {
         String expiryDate = announcement.getExpiryDate() != null ?
                 dateFormat.format(announcement.getExpiryDate()) : "null";
-
         return announcement.getId() + "|" +
                 announcement.getTitle() + "|" +
                 announcement.getContent() + "|" +

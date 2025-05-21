@@ -34,3 +34,30 @@ admin@studentlms.com|LOGIN|Admin login successful|1747828081835
 admin@studentlms.com|COURSE_UPDATE|Updated course: BM101 in school: School of Business|1747828224034
 admin@studentlms.com|REGISTRATION_CLEAR_QUEUE|Cleared registration queue with 0 items|1747828443444
 admin@studentlms.com|LOGIN|Admin login successful|1747829193983
+admin@studentlms.com|LOGIN|Admin login successful|1747829700709
+admin@studentlms.com|LOGIN|Admin login successful|1747830969809
+admin@studentlms.com|LOGIN|Admin login successful|1747831490491
+admin@studentlms.com|REGISTRATION_DELETE|Deleted registration: john.doe@example.com for course: CS101|1747831620306
+admin@studentlms.com|REGISTRATION_DELETE|Deleted registration: jane.smith@example.com for course: MATH201|1747831629136
+admin@studentlms.com|REGISTRATION_DELETE|Deleted registration: sarah.johnson@example.com for course: ENG102|1747831633881
+admin@studentlms.com|LOGIN|Admin login successful|1747832739739
+admin@studentlms.com|LOGIN|Admin login successful|1747833296514
+admin@studentlms.com|PAYMENT_UPDATE|Updated payment status: TRX789012 to COMPLETED|1747833322027
+admin@studentlms.com|PAYMENT_UPDATE|Updated payment status: TRX789012 to FAILED|1747833328003
+admin@studentlms.com|LOGIN|Admin login successful|1747834367138
+admin@studentlms.com|LOGIN|Admin login successful|1747837645214
+admin@studentlms.com|LOGOUT|Admin logout|1747837681881
+admin@studentlms.com|LOGIN|Admin login successful|1747843766795
+admin@studentlms.com|ANNOUNCEMENT_DELETE|Deleted announcement: 1|1747844132434
+admin@studentlms.com|LOGOUT|Admin logout|1747845019490
+admin@studentlms.com|LOGIN|Admin login successful|1747845576698
+admin@studentlms.com|LOGIN|Admin login successful|1747846010334
+admin@studentlms.com|ANNOUNCEMENT_UPDATE|Updated announcement: System Maintenance Notice|1747846050309
+admin@studentlms.com|LOGIN|Admin login successful|1747852758308
+admin@studentlms.com|LOGOUT|Admin logout|1747853141079
+admin@studentlms.com|LOGIN|Admin login successful|1747854453816
+admin@studentlms.com|PAYMENT_RECORD|Recorded payment: TRX525443 for tharusharukshan573@gmail.com|1747854525448
+admin@studentlms.com|LOGIN|Admin login successful|1747854880068
+admin@studentlms.com|LOGIN|Admin login successful|1747855505170
+admin@studentlms.com|PAYMENT_UPDATE|Updated payment status: TRX123456 to COMPLETED|1747855517702
+admin@studentlms.com|LOGIN|Admin login successful|1747856555104

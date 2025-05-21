@@ -1,7 +1,8 @@
 package com.lms.studentlms.model;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 
 public class PaymentRecord {
     private String studentEmail;
@@ -11,12 +12,13 @@ public class PaymentRecord {
     private double amount;
     private String status;
 
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public PaymentRecord() {
         this.date = new Date();
     }
 
-    public PaymentRecord(String studentEmail, String transactionId, Date date,
-                         String description, double amount, String status) {
+    public PaymentRecord(String studentEmail, String transactionId, Date date, String description, double amount, String status) {
         this.studentEmail = studentEmail;
         this.transactionId = transactionId;
         this.date = date;
@@ -75,8 +77,20 @@ public class PaymentRecord {
     }
 
     public String getFormattedDate() {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        return formatter.format(date);
+        return dateFormat.format(date);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PaymentRecord that = (PaymentRecord) o;
+        return Objects.equals(transactionId, that.transactionId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(transactionId);
     }
 
     @Override
@@ -84,7 +98,7 @@ public class PaymentRecord {
         return "PaymentRecord{" +
                 "studentEmail='" + studentEmail + '\'' +
                 ", transactionId='" + transactionId + '\'' +
-                ", date=" + getFormattedDate() +
+                ", date=" + date +
                 ", amount=" + amount +
                 ", status='" + status + '\'' +
                 '}';
