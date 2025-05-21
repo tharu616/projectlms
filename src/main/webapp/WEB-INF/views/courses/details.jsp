@@ -18,7 +18,7 @@
 </head>
 <body class="bg-gray-100">
 <div class="min-h-screen flex">
-    <!-- Sidebar -->
+    <!-- Sidebar for logged-in users -->
     <c:if test="${not empty sessionScope.userEmail}">
         <jsp:include page="../shared/user-sidebar.jsp" />
     </c:if>
@@ -84,7 +84,7 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <form action="${pageContext.request.contextPath}/user/register-course" method="post">
+                            <form action="${pageContext.request.contextPath}/courses/details" method="post">
                                 <input type="hidden" name="courseCode" value="${course.courseCode}">
                                 <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white py-3 px-4 rounded-md transition">
                                     Register for this Course
@@ -99,4 +99,3 @@
 </div>
 </body>
 </html>
-

@@ -1,158 +1,214 @@
 package com.lms.studentlms.util;
 
-import com.lms.studentlms.dao.RegistrationQueueDao;
+import com.lms.studentlms.dao.CourseRegistrationDao;
 import com.lms.studentlms.model.CourseRegistration;
 
-import java.util.LinkedList;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Queue;
+import java.util.stream.Collectors;
 
-/**
- * Singleton class that manages the course registration queue.
- * Implements thread-safe operations and persistent storage.
- */
 public class RegistrationQueueManager {
-    private static volatile RegistrationQueueManager instance;
-    private final Queue<CourseRegistration> registrationQueue;
-    private final RegistrationQueueDao queueDao;
-    private boolean isLoaded;
+    private static final String QUEUE_FILE_PATH = "C:\\Users\\USER\\OneDrive - Sri Lanka Institute of Information Technology\\Desktop\\New folder\\projectlms\\src\\main\\resources\\data\\ registration_queue.txt";
+    private static RegistrationQueueManager instance;
+    private CourseRegistrationDao registrationDao;
 
-    /**
-     * Private constructor to enforce singleton pattern.
-     */
     private RegistrationQueueManager() {
-        this.registrationQueue = new LinkedList<>();
-        this.queueDao = new RegistrationQueueDao();
-        this.isLoaded = false;
+        this.registrationDao = new CourseRegistrationDao();
     }
 
-    /**
-     * Gets the singleton instance using double-checked locking.
-     *
-     * @return The singleton instance
-     */
-    public static RegistrationQueueManager getInstance() {
+    public static synchronized RegistrationQueueManager getInstance() {
         if (instance == null) {
-            synchronized (RegistrationQueueManager.class) {
-                if (instance == null) {
-                    instance = new RegistrationQueueManager();
-                }
-            }
+            instance = new RegistrationQueueManager();
         }
         return instance;
     }
 
-    /**
-     * Ensures the queue is loaded from persistent storage.
-     */
-    private void ensureQueueLoaded() {
-        if (!isLoaded) {
-            synchronized (this) {
-                if (!isLoaded) {
-                    List<CourseRegistration> storedRegistrations = queueDao.loadQueue();
-                    registrationQueue.clear();
-                    registrationQueue.addAll(storedRegistrations);
-                    isLoaded = true;
+    public List<CourseRegistration> getPendingRegistrations() {
+        try {
+            if (!Files.exists(Paths.get(QUEUE_FILE_PATH))) {
+                return new ArrayList<>();
+            }
+
+            List<String> lines = Files.readAllLines(Paths.get(QUEUE_FILE_PATH));
+            List<CourseRegistration> registrations = new ArrayList<>();
+
+            for (String line : lines) {
+                String[] parts = line.split(",");
+                if (parts.length >= 7) {
+                    CourseRegistration registration = new CourseRegistration(
+                            parts[0], // studentEmail
+                            parts[1], // studentName
+                            parts[2], // courseCode
+                            parts[3], // courseName
+                            parts[4], // courseFee
+                            parts[5]  // schoolName
+                    );
+
+                    try {
+                        registration.setTimestamp(Long.parseLong(parts[6]));
+                    } catch (NumberFormatException e) {
+                        registration.setTimestamp(System.currentTimeMillis());
+                    }
+
+                    registrations.add(registration);
                 }
             }
+
+            return registrations;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
-    /**
-     * Adds a registration request to the queue.
-     *
-     * @param registration The registration to add
-     */
-    public void addRegistration(CourseRegistration registration) {
-        ensureQueueLoaded();
-        synchronized (this) {
-            registrationQueue.add(registration);
-            queueDao.addRegistration(registration);
-        }
-    }
-
-    /**
-     * Processes and removes the next registration in the queue.
-     *
-     * @return The next registration, or null if the queue is empty
-     */
+    // Add the missing method that's causing the error
     public CourseRegistration processNextRegistration() {
-        ensureQueueLoaded();
-        synchronized (this) {
-            CourseRegistration registration = registrationQueue.poll();
-            if (registration != null) {
-                queueDao.removeFirstRegistration();
+        List<CourseRegistration> pendingRegistrations = getPendingRegistrations();
+
+        if (pendingRegistrations.isEmpty()) {
+            return null;
+        }
+
+        // Sort by timestamp (oldest first)
+        pendingRegistrations.sort((r1, r2) -> Long.compare(r1.getTimestamp(), r2.getTimestamp()));
+
+        // Get the first (oldest) registration
+        CourseRegistration nextRegistration = pendingRegistrations.get(0);
+
+        // Remove it from the queue
+        removeFromQueue(nextRegistration.getStudentEmail(), nextRegistration.getCourseCode());
+
+        return nextRegistration;
+    }
+
+    public boolean addRegistration(CourseRegistration registration) {
+        try {
+            String line = formatRegistrationLine(registration);
+            List<String> lines = new ArrayList<>();
+            lines.add(line);
+
+            return FileUtils.writeLinesToFile(QUEUE_FILE_PATH, lines, true);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public int processQueue() {
+        List<CourseRegistration> pendingRegistrations = getPendingRegistrations();
+        int processed = 0;
+
+        for (CourseRegistration registration : pendingRegistrations) {
+            boolean saved = registrationDao.saveRegistration(registration);
+            if (saved) {
+                processed++;
             }
-            return registration;
         }
+
+        if (processed > 0) {
+            clearQueue();
+        }
+
+        return processed;
     }
 
-    /**
-     * Gets all registrations in the queue.
-     *
-     * @return A list of all registrations
-     */
-    public List<CourseRegistration> getAllRegistrations() {
-        ensureQueueLoaded();
-        synchronized (this) {
-            return new LinkedList<>(registrationQueue);
-        }
-    }
+    public boolean approveRegistration(String studentEmail, String courseCode) {
+        List<CourseRegistration> pendingRegistrations = getPendingRegistrations();
 
-    /**
-     * Gets the current size of the queue.
-     *
-     * @return The number of registrations in the queue
-     */
-    public int getQueueSize() {
-        ensureQueueLoaded();
-        synchronized (this) {
-            return registrationQueue.size();
-        }
-    }
-
-    /**
-     * Checks if the queue is empty.
-     *
-     * @return true if the queue is empty, false otherwise
-     */
-    public boolean isQueueEmpty() {
-        ensureQueueLoaded();
-        synchronized (this) {
-            return registrationQueue.isEmpty();
-        }
-    }
-
-    /**
-     * Clears all registrations from the queue.
-     */
-    public void clearAllRegistrations() {
-        ensureQueueLoaded();
-        synchronized (this) {
-            registrationQueue.clear();
-            queueDao.clearAllRequests();
-        }
-    }
-
-    /**
-     * Gets a student's position in the queue.
-     *
-     * @param studentEmail The student's email
-     * @param courseCode The course code
-     * @return The position (1-based), or -1 if not found
-     */
-    public int getStudentPositionInQueue(String studentEmail, String courseCode) {
-        ensureQueueLoaded();
-        synchronized (this) {
-            int position = 1;
-            for (CourseRegistration reg : registrationQueue) {
-                if (reg.getStudentEmail().equals(studentEmail) &&
-                        reg.getCourseCode().equals(courseCode)) {
-                    return position;
+        for (CourseRegistration registration : pendingRegistrations) {
+            if (registration.getStudentEmail().equals(studentEmail) &&
+                    registration.getCourseCode().equals(courseCode)) {
+                boolean saved = registrationDao.saveRegistration(registration);
+                if (saved) {
+                    removeFromQueue(studentEmail, courseCode);
+                    return true;
                 }
-                position++;
             }
-            return -1; // Not found
         }
+
+        return false;
+    }
+
+    public boolean rejectRegistration(String studentEmail, String courseCode) {
+        return removeFromQueue(studentEmail, courseCode);
+    }
+
+    public int clearQueue() {
+        try {
+            int size = getPendingRegistrations().size();
+            Files.write(Paths.get(QUEUE_FILE_PATH), new ArrayList<>());
+            return size;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return 0;
+        }
+    }
+
+    // Also add these methods from the RegistrationQueueService
+    public List<CourseRegistration> getAllRegistrations() {
+        return getPendingRegistrations();
+    }
+
+    public int getQueueSize() {
+        return getPendingRegistrations().size();
+    }
+
+    public void clearAllRegistrations() {
+        clearQueue();
+    }
+
+    public int getStudentPositionInQueue(String studentEmail, String courseCode) {
+        if (studentEmail == null || studentEmail.isEmpty() || courseCode == null || courseCode.isEmpty()) {
+            return -1;
+        }
+
+        List<CourseRegistration> registrations = getPendingRegistrations();
+        // Sort by timestamp (oldest first)
+        registrations.sort((r1, r2) -> Long.compare(r1.getTimestamp(), r2.getTimestamp()));
+
+        for (int i = 0; i < registrations.size(); i++) {
+            CourseRegistration reg = registrations.get(i);
+            if (reg.getStudentEmail().equals(studentEmail) && reg.getCourseCode().equals(courseCode)) {
+                return i + 1; // Position is 1-based
+            }
+        }
+
+        return -1; // Not in queue
+    }
+
+    private boolean removeFromQueue(String studentEmail, String courseCode) {
+        try {
+            List<CourseRegistration> pendingRegistrations = getPendingRegistrations();
+            List<CourseRegistration> updatedRegistrations = pendingRegistrations.stream()
+                    .filter(r -> !(r.getStudentEmail().equals(studentEmail) && r.getCourseCode().equals(courseCode)))
+                    .collect(Collectors.toList());
+
+            if (updatedRegistrations.size() < pendingRegistrations.size()) {
+                List<String> lines = updatedRegistrations.stream()
+                        .map(this::formatRegistrationLine)
+                        .collect(Collectors.toList());
+
+                Files.write(Paths.get(QUEUE_FILE_PATH), lines);
+                return true;
+            }
+
+            return false;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    private String formatRegistrationLine(CourseRegistration registration) {
+        return registration.getStudentEmail() + "," +
+                registration.getStudentName() + "," +
+                registration.getCourseCode() + "," +
+                registration.getCourseName() + "," +
+                registration.getCourseFee() + "," +
+                registration.getSchoolName() + "," +
+                registration.getTimestamp();
     }
 }

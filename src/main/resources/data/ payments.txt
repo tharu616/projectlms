@@ -8,3 +8,4 @@ sarah.johnson@example.com,Sarah Johnson,MATH201,Advanced Mathematics,30000.00,CR
 michael.brown@example.com,Michael Brown,ENG102,English Composition,15000.00,DEBIT_CARD,TRX890123,1716754800000
 robert.wilson@example.com,Robert Wilson,BIO150,Introduction to Biology,28000.00,CREDIT_CARD,TRX901234,1716841200000
 emily.davis@example.com,Emily Davis,PHYS201,Physics Mechanics,32000.00,BANK_TRANSFER,TRX012345,1716927600000
+tharusharukshan573@gmail.com,tharusha rukshan,PCM101,Professional Certificate in Marketing,44000.0,CREDIT_CARD,TXN5137E4A7,1747859537305

@@ -16,7 +16,6 @@ import java.util.List;
 
 @WebServlet("/user/registration-status")
 public class RegistrationStatusServlet extends HttpServlet {
-
     private CourseRegistrationDao registrationDao;
     private RegistrationQueueManager queueManager;
 
@@ -37,14 +36,11 @@ public class RegistrationStatusServlet extends HttpServlet {
         }
 
         String userEmail = (String) session.getAttribute("userEmail");
-
         // Get user's course registrations
         List<CourseRegistration> registrations = registrationDao.getRegistrationsByEmail(userEmail);
-
         // Get user's position in queue for pending registrations
         String courseCode = request.getParameter("courseCode");
         int queuePosition = -1;
-
         if (courseCode != null && !courseCode.isEmpty()) {
             queuePosition = queueManager.getStudentPositionInQueue(userEmail, courseCode);
         }
@@ -53,7 +49,6 @@ public class RegistrationStatusServlet extends HttpServlet {
         request.setAttribute("registrations", registrations);
         request.setAttribute("queuePosition", queuePosition);
         request.setAttribute("courseCode", courseCode);
-
         // Forward to the registration status JSP
         request.getRequestDispatcher("/WEB-INF/views/user/registrations/queue-status.jsp").forward(request, response);
     }

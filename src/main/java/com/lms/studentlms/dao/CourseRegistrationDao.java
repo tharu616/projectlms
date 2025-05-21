@@ -87,6 +87,7 @@ public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
         }
     }
 
+    // Keep only ONE implementation of this method
     public boolean isUserRegisteredForCourse(String email, String courseCode) {
         CourseRegistration registration = getRegistrationByEmailAndCourse(email, courseCode);
         return registration != null;
@@ -109,31 +110,27 @@ public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
 
     @Override
     protected CourseRegistration mapEntityFromLine(String line) {
-        try {
-            String[] parts = line.split(",");
-            if (parts.length >= 6) {
-                CourseRegistration registration = new CourseRegistration();
-                registration.setStudentEmail(parts[0]);
-                registration.setStudentName(parts[1]);
-                registration.setCourseCode(parts[2]);
-                registration.setCourseName(parts[3]);
-                registration.setCourseFee(parts[4]);
-                registration.setSchoolName(parts[5]);
+        String[] parts = line.split(",");
+        if (parts.length >= 6) {
+            CourseRegistration registration = new CourseRegistration();
+            registration.setStudentEmail(parts[0]);
+            registration.setStudentName(parts[1]);
+            registration.setCourseCode(parts[2]);
+            registration.setCourseName(parts[3]);
+            registration.setCourseFee(parts[4]);
+            registration.setSchoolName(parts[5]);
 
-                if (parts.length > 6) {
-                    try {
-                        registration.setTimestamp(Long.parseLong(parts[6]));
-                    } catch (NumberFormatException e) {
-                        registration.setTimestamp(System.currentTimeMillis());
-                    }
-                } else {
+            if (parts.length > 6) {
+                try {
+                    registration.setTimestamp(Long.parseLong(parts[6]));
+                } catch (NumberFormatException e) {
                     registration.setTimestamp(System.currentTimeMillis());
                 }
-
-                return registration;
+            } else {
+                registration.setTimestamp(System.currentTimeMillis());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            return registration;
         }
         return null;
     }

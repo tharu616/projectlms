@@ -15,9 +15,8 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/admin/registration-queue/*")
+@WebServlet("/admin/registration-queue")
 public class RegistrationQueueServlet extends HttpServlet {
-
     private RegistrationQueueManager queueManager;
     private CourseRegistrationDao registrationDao;
     private AdminLogDao adminLogDao;
@@ -32,73 +31,86 @@ public class RegistrationQueueServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Check if admin is logged in
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("adminEmail") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
-            return;
-        }
+        try {
+            // Check if admin is logged in
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("adminEmail") == null) {
+                response.sendRedirect(request.getContextPath() + "/admin/login");
+                return;
+            }
 
-        String pathInfo = request.getPathInfo();
-
-        if (pathInfo == null || pathInfo.equals("/")) {
-            // Show queue management page
-            List<CourseRegistration> pendingRegistrations = queueManager.getAllRegistrations();
+            // Get pending registrations
+            List<CourseRegistration> pendingRegistrations = queueManager.getPendingRegistrations();
             request.setAttribute("pendingRegistrations", pendingRegistrations);
-            request.setAttribute("queueSize", queueManager.getQueueSize());
-            request.getRequestDispatcher("/WEB-INF/views/admin/registration-queue/list.jsp").forward(request, response);
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
+            request.setAttribute("queueSize", pendingRegistrations.size());
+
+            request.getRequestDispatcher("/WEB-INF/views/admin/registrations/queue.jsp").forward(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Check if admin is logged in
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("adminEmail") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
-            return;
-        }
-
-        String adminEmail = (String) session.getAttribute("adminEmail");
-        String action = request.getParameter("action");
-
-        if ("approveRegistration".equals(action)) {
-            // Process registration from queue
-            CourseRegistration registration = queueManager.processNextRegistration();
-
-            if (registration != null) {
-                // Save to completed registrations
-                registrationDao.saveRegistration(registration);
-
-                adminLogDao.logActivity(adminEmail, "REGISTRATION_APPROVE",
-                        "Approved registration: " + registration.getStudentEmail() + " for " + registration.getCourseCode());
+        try {
+            // Check if admin is logged in
+            HttpSession session = request.getSession(false);
+            if (session == null || session.getAttribute("adminEmail") == null) {
+                response.sendRedirect(request.getContextPath() + "/admin/login");
+                return;
             }
 
-            response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
-        } else if ("rejectRegistration".equals(action)) {
-            // Process and reject registration from queue
-            CourseRegistration registration = queueManager.processNextRegistration();
+            String adminEmail = (String) session.getAttribute("adminEmail");
+            String action = request.getParameter("action");
 
-            if (registration != null) {
-                adminLogDao.logActivity(adminEmail, "REGISTRATION_REJECT",
-                        "Rejected registration: " + registration.getStudentEmail() + " for " + registration.getCourseCode());
+            if ("processQueue".equals(action)) {
+                // Process all pending registrations
+                int processed = queueManager.processQueue();
+                adminLogDao.logActivity(adminEmail, "REGISTRATION_QUEUE_PROCESS",
+                        "Processed " + processed + " registrations from queue");
+                response.sendRedirect(request.getContextPath() + "/admin/registration-queue?processed=" + processed);
+            } else if ("clearQueue".equals(action)) {
+                // Clear the registration queue
+                int cleared = queueManager.clearQueue();
+                adminLogDao.logActivity(adminEmail, "REGISTRATION_QUEUE_CLEAR",
+                        "Cleared " + cleared + " registrations from queue");
+                response.sendRedirect(request.getContextPath() + "/admin/registration-queue?cleared=" + cleared);
+            } else if ("approveRegistration".equals(action)) {
+                // Approve a specific registration
+                String studentEmail = request.getParameter("studentEmail");
+                String courseCode = request.getParameter("courseCode");
+
+                if (studentEmail != null && courseCode != null) {
+                    boolean approved = queueManager.approveRegistration(studentEmail, courseCode);
+                    if (approved) {
+                        adminLogDao.logActivity(adminEmail, "REGISTRATION_APPROVE",
+                                "Approved registration: " + studentEmail + " for " + courseCode);
+                    }
+                }
+                response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
+            } else if ("rejectRegistration".equals(action)) {
+                // Reject a specific registration
+                String studentEmail = request.getParameter("studentEmail");
+                String courseCode = request.getParameter("courseCode");
+
+                if (studentEmail != null && courseCode != null) {
+                    boolean rejected = queueManager.rejectRegistration(studentEmail, courseCode);
+                    if (rejected) {
+                        adminLogDao.logActivity(adminEmail, "REGISTRATION_REJECT",
+                                "Rejected registration: " + studentEmail + " for " + courseCode);
+                    }
+                }
+                response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
             }
-
-            response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
-        } else if ("clearQueue".equals(action)) {
-            // Clear all pending registrations
-            int count = queueManager.getQueueSize();
-            queueManager.clearAllRegistrations();
-
-            adminLogDao.logActivity(adminEmail, "REGISTRATION_CLEAR_QUEUE",
-                    "Cleared registration queue with " + count + " items");
-
-            response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/admin/registration-queue");
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", e.getMessage());
+            request.getRequestDispatcher("/error.jsp").forward(request, response);
         }
     }
 }

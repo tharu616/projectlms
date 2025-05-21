@@ -61,3 +61,12 @@ admin@studentlms.com|LOGIN|Admin login successful|1747854880068
 admin@studentlms.com|LOGIN|Admin login successful|1747855505170
 admin@studentlms.com|PAYMENT_UPDATE|Updated payment status: TRX123456 to COMPLETED|1747855517702
 admin@studentlms.com|LOGIN|Admin login successful|1747856555104
+admin@studentlms.com|LOGIN|Admin login successful|1747857765240
+admin@studentlms.com|LOGIN|Admin login successful|1747857854303
+admin@studentlms.com|LOGIN|Admin login successful|1747858345095
+admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 10 registrations from queue|1747858348691
+admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 0 registrations from queue|1747858350859
+admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 0 registrations from queue|1747858351987
+admin@studentlms.com|REGISTRATION_QUEUE_PROCESS|Processed 0 registrations from queue|1747858393806
+admin@studentlms.com|PAYMENT_UPDATE|Updated payment status: TRX789012 to FAILED|1747858458708
+admin@studentlms.com|LOGOUT|Admin logout|1747858541935
