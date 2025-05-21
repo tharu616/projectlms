@@ -110,14 +110,14 @@ public class RegistrationManagementServlet extends HttpServlet {
 
             if ("create".equals(action)) {
                 // Create new registration
-                CourseRegistration registration = new CourseRegistration(
-                        request.getParameter("studentEmail"),
-                        request.getParameter("studentName"),
-                        request.getParameter("courseCode"),
-                        request.getParameter("courseName"),
-                        request.getParameter("courseFee"),
-                        request.getParameter("schoolName")
-                );
+                CourseRegistration registration = new CourseRegistration();
+                registration.setStudentEmail(request.getParameter("studentEmail"));
+                registration.setStudentName(request.getParameter("studentName"));
+                registration.setCourseCode(request.getParameter("courseCode"));
+                registration.setCourseName(request.getParameter("courseName"));
+                registration.setCourseFee(request.getParameter("courseFee"));
+                registration.setSchoolName(request.getParameter("schoolName"));
+                registration.setTimestamp(System.currentTimeMillis());
 
                 boolean created = registrationDao.saveRegistration(registration);
 

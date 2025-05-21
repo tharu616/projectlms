@@ -109,26 +109,31 @@ public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
 
     @Override
     protected CourseRegistration mapEntityFromLine(String line) {
-        String[] parts = line.split(",");
-        if (parts.length >= 6) {
-            CourseRegistration registration = new CourseRegistration(
-                    parts[0], // studentEmail
-                    parts[1], // studentName
-                    parts[2], // courseCode
-                    parts[3], // courseName
-                    parts[4], // courseFee
-                    parts[5]  // schoolName
-            );
+        try {
+            String[] parts = line.split(",");
+            if (parts.length >= 6) {
+                CourseRegistration registration = new CourseRegistration();
+                registration.setStudentEmail(parts[0]);
+                registration.setStudentName(parts[1]);
+                registration.setCourseCode(parts[2]);
+                registration.setCourseName(parts[3]);
+                registration.setCourseFee(parts[4]);
+                registration.setSchoolName(parts[5]);
 
-            if (parts.length > 6) {
-                try {
-                    registration.setTimestamp(Long.parseLong(parts[6]));
-                } catch (NumberFormatException e) {
+                if (parts.length > 6) {
+                    try {
+                        registration.setTimestamp(Long.parseLong(parts[6]));
+                    } catch (NumberFormatException e) {
+                        registration.setTimestamp(System.currentTimeMillis());
+                    }
+                } else {
                     registration.setTimestamp(System.currentTimeMillis());
                 }
-            }
 
-            return registration;
+                return registration;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

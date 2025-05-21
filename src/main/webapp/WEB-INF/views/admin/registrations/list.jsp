@@ -52,7 +52,6 @@
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">School</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Registration Date</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                 </tr>
                 </thead>
@@ -80,11 +79,6 @@
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="text-sm text-gray-900">${registration.formattedDate}</div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="px-2 py-1 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                        Active
-                                    </span>
-                        </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <a href="${pageContext.request.contextPath}/admin/registrations/view/${registration.studentEmail}/${registration.courseCode}" class="text-blue-600 hover:text-blue-900 mr-3">
                                 <i class="fas fa-eye"></i>
@@ -97,7 +91,7 @@
                 </c:forEach>
                 <c:if test="${empty registrations}">
                     <tr>
-                        <td colspan="6" class="px-6 py-4 text-center text-gray-500">No registrations found</td>
+                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">No registrations found</td>
                     </tr>
                 </c:if>
                 </tbody>
@@ -135,3 +129,4 @@
 </script>
 </body>
 </html>
+

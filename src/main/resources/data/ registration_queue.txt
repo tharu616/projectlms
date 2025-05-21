@@ -1,3 +1,0 @@
-sarah.johnson@example.com,Sarah Johnson,CS101,Introduction to Computer Science,25000.00,Computer Science,1716668400000
-michael.brown@example.com,Michael Brown,MATH201,Advanced Mathematics,30000.00,Mathematics,1716754800000
-jane.smith@example.com,Jane Smith,BIO150,Introduction to Biology,28000.00,Life Sciences,1716841200000

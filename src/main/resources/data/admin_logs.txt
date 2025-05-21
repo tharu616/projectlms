@@ -18,3 +18,19 @@ admin@studentlms.com|LOGOUT|Admin logout|1747814536070
 admin@studentlms.com|LOGIN|Admin login successful|1747814594824
 admin@studentlms.com|LOGIN|Admin login successful|1747814805069
 admin@studentlms.com|LOGIN|Admin login successful|1747815357726
+admin@studentlms.com|LOGIN|Admin login successful|1747819136964
+admin@studentlms.com|USER_DELETE|Deleted user: jane.smith@example.com|1747819524684
+admin@studentlms.com|LOGOUT|Admin logout|1747819551493
+admin@studentlms.com|LOGIN|Admin login successful|1747824146318
+admin@studentlms.com|LOGIN|Admin login successful|1747824876202
+admin@studentlms.com|LOGOUT|Admin logout|1747825252000
+admin@studentlms.com|LOGIN|Admin login successful|1747826123614
+admin@studentlms.com|COURSE_DELETE|Deleted course: DM101|1747826170719
+admin@studentlms.com|LOGOUT|Admin logout|1747826255938
+admin@studentlms.com|LOGIN|Admin login successful|1747826918282
+admin@studentlms.com|REGISTRATION_CLEAR_QUEUE|Cleared registration queue with 3 items|1747827156487
+admin@studentlms.com|USER_DELETE|Deleted user: tharusharukshan573@gmail.com|1747827190954
+admin@studentlms.com|LOGIN|Admin login successful|1747828081835
+admin@studentlms.com|COURSE_UPDATE|Updated course: BM101 in school: School of Business|1747828224034
+admin@studentlms.com|REGISTRATION_CLEAR_QUEUE|Cleared registration queue with 0 items|1747828443444
+admin@studentlms.com|LOGIN|Admin login successful|1747829193983

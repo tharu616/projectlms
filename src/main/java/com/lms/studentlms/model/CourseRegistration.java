@@ -1,5 +1,8 @@
 package com.lms.studentlms.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class CourseRegistration {
     private String studentEmail;
     private String studentName;
@@ -79,6 +82,11 @@ public class CourseRegistration {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getFormattedDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return sdf.format(new Date(timestamp));
     }
 
     @Override
