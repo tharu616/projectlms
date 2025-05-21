@@ -18,7 +18,7 @@ import java.util.Optional;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-
+//Inheritance
     private UserDao userDao;
     private AdminDao adminDao;
     private AdminLogDao adminLogDao;
