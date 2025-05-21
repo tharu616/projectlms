@@ -17,7 +17,7 @@ public class AdminLogDao extends BaseDao<AdminLog> {
     public AdminLogDao() {
         super(FILE_PATH);
     }
-
+//parameterized constructor
     public void logActivity(String adminEmail, String actionType, String description) {
         AdminLog log = new AdminLog();
         log.setAdminEmail(adminEmail);
