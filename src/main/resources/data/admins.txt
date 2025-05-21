@@ -1,0 +1,3 @@
+Admin User,admin,admin@gmail.com,$2a$12$admin1234567890admin1234567890admin,ADMIN
+System Administrator,sysadmin,sysadmin@studentlms.com,$2a$12$sysadmin1234567890sysadmin1234567890,ADMIN
+Jane Doe,janedoe,jane.doe@studentlms.com,$2a$12$janedoe1234567890janedoe1234567890,ADMIN

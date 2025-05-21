@@ -1,0 +1,5 @@
+CS101,Introduction to Computer Science,3 months,Computer Science,25000.00,This course introduces the fundamentals of computer science and programming.,None,Learn basic programming concepts and problem-solving skills.
+MATH201,Advanced Mathematics,4 months,Mathematics,30000.00,A comprehensive study of advanced mathematical concepts.,MATH101,Develop analytical thinking and mathematical reasoning abilities.
+ENG102,English Composition,2 months,Languages,15000.00,Improve your writing skills and learn effective communication.,ENG101,Master essay writing and critical analysis.
+BIO150,Introduction to Biology,3 months,Life Sciences,28000.00,Study the basic principles of biology and life sciences.,None,Understand the fundamentals of living organisms and biological processes.
+PHYS201,Physics Mechanics,4 months,Physical Sciences,32000.00,Learn about classical mechanics and physical laws.,MATH101,Apply mathematical concepts to solve physics problems.

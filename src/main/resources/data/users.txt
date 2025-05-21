@@ -1,0 +1,5 @@
+John Doe,johndoe,john.doe@example.com,$2a$12$1234567890abcdef1234567890abcdef,USER
+Jane Smith,janesmith,jane.smith@example.com,$2a$12$abcdef1234567890abcdef1234567890,USER
+Admin User,admin,admin@studentlms.com,$2a$12$admin1234567890admin1234567890admin,ADMIN
+Sarah Johnson,sarahj,sarah.johnson@example.com,$2a$12$sarahjohnson1234567890sarahjohnson,USER
+Michael Brown,mikeb,michael.brown@example.com,$2a$12$michaelbrown1234567890michaelbrown,USER
