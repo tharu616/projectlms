@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
+//Inheritance
 public class CourseRegistrationDao extends BaseDao<CourseRegistration> {
     private static final String FILE_PATH = "src/main/resources/data/registrations.txt";
 
