@@ -33,10 +33,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Check if user is already logged in
+        //  We have to check if user is already logged in
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("userEmail") != null) {
-            // User is already logged in, redirect to dashboard
+            // if the user is already logged in, redirect to dashboard
             response.sendRedirect(request.getContextPath() + "/user/dashboard");
             return;
         } else if (session != null && session.getAttribute("adminEmail") != null) {
