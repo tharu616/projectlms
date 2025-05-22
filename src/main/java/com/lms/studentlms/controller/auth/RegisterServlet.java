@@ -18,7 +18,7 @@ import java.util.List;
 public class RegisterServlet extends HttpServlet {
 
     private UserDao userDao;
-
+//polymorphism
     @Override
     public void init() throws ServletException {
         userDao = new UserDao();
