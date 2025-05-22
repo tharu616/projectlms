@@ -19,7 +19,7 @@ public class RegistrationStatusServlet extends HttpServlet {
 
     private CourseRegistrationDao registrationDao;
     private RegistrationQueueManager queueManager;
-
+//polymorphism
     @Override
     public void init() throws ServletException {
         registrationDao = new CourseRegistrationDao();
