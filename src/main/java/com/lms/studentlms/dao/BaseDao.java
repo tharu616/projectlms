@@ -59,7 +59,7 @@ public abstract class BaseDao<T> {
             return false;
         }
     }
-
+//try catch=risky version of throw
     /**
      * Saves multiple entities to the data store
      * @param entities List of entities to save
