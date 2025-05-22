@@ -20,7 +20,7 @@ public abstract class BaseDao<T> {
     public BaseDao(String filePath) {
         this.filePath = filePath;
     }
-
+//ty catch is a risky version of throw
     /**
      * Finds all entities in the data store
      * @return List of all entities
